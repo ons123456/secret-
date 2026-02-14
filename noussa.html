@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Saint-Valentin</title>
+<link rel="icon" href="https://fav.farm/❤️" />
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+
+body{
+min-height:100vh;
+background:linear-gradient(145deg,#ffb6c1 0%,#ff9eb5 40%,#ffc0cb 100%);
+font-family:Arial,Helvetica,sans-serif;
+display:flex;
+align-items:center;
+justify-content:center;
+position:relative;
+overflow:hidden;
+padding:20px;
+}
+
+/* Ballons */
+.balloon{
+position:absolute;
+bottom:-100px;
+width:60px;
+height:80px;
+background-color:#ff6f91;
+border-radius:50% 50% 50% 50% / 60% 60% 40% 40%;
+animation:floatUp 12s linear infinite;
+z-index:1;
+}
+@keyframes floatUp{
+0%{transform:translateY(0);opacity:0.9;}
+100%{transform:translateY(-120vh);opacity:0.2;}
+}
+
+/* Carte */
+.valentine-card{
+background:rgba(255,240,245,0.9);
+border-radius:40px;
+padding:40px 30px;
+box-shadow:0 20px 40px rgba(255,20,80,0.3);
+text-align:center;
+max-width:600px;
+width:100%;
+z-index:20;
+position:relative;
+}
+
+h1{
+font-size:3rem;
+color:#d63c5e;
+margin-bottom:20px;
+}
+
+.subtitle{
+font-size:1.4rem;
+color:#b34167;
+margin-bottom:40px;
+font-style:italic;
+font-weight:bold;
+}
+
+.button-container{
+display:flex;
+justify-content:center;
+gap:30px;
+margin:40px 0 20px;
+min-height:120px;
+position:relative;
+}
+
+.btn{
+padding:16px 42px;
+font-size:1.8rem;
+font-weight:bold;
+border:none;
+border-radius:60px;
+cursor:pointer;
+box-shadow:0 8px 0 #a13a4b;
+border:2px solid white;
+position:relative;
+min-width:180px;
+}
+
+.btn-yes{
+background:#ff4d6d;
+color:white;
+}
+
+.btn-no{
+background:#b3b3b3;
+color:#4a4a4a;
+cursor:default;
+box-shadow:0 8px 0 #6b6b6b;
+}
+
+/* Message */
+.response-message{
+margin-top:30px;
+font-size:2rem;
+font-weight:bold;
+color:#c72e5c;
+min-height:80px;
+background:rgba(255,255,255,0.6);
+border-radius:50px;
+padding:15px;
+border:3px dashed white;
+}
+
+/* Animation pop */
+@keyframes popAttention{
+0%{transform:scale(0.6);opacity:0;}
+40%{transform:scale(1.3);}
+60%{transform:scale(0.9);}
+80%{transform:scale(1.1);}
+100%{transform:scale(1);opacity:1;}
+}
+.attention{
+animation:popAttention 0.7s ease;
+}
+
+@media(max-width:500px){
+h1{font-size:2.2rem;}
+.btn{font-size:1.4rem;padding:14px 25px;}
+}
+</style>
+</head>
+<body>
+
+<div class="balloon" style="left:10%;animation-delay:0s;"></div>
+<div class="balloon" style="left:30%;animation-delay:2s;"></div>
+<div class="balloon" style="left:60%;animation-delay:1s;"></div>
+<div class="balloon" style="left:80%;animation-delay:3s;"></div>
+
+<div class="valentine-card">
+<h1>💖 Saint-Valentin 💖</h1>
+<div class="subtitle">هل تؤمن بالحب يا حَبيبُ</div>
+
+<div class="button-container" id="buttonContainer">
+<button class="btn btn-yes" id="yesBtn">OUI ❤️</button>
+<button class="btn btn-no" id="noBtn">NON</button>
+</div>
+
+<div class="response-message attention" id="responseMessage">
+😊 جرب قول لا
+</div>
+</div>
+
+<script>
+const noBtn = document.getElementById('noBtn');
+const yesBtn = document.getElementById('yesBtn');
+const responseMessage = document.getElementById('responseMessage');
+const container = document.getElementById('buttonContainer');
+
+/* حركة NON داخل الكونتينر */
+function moveButton(){
+const containerRect = container.getBoundingClientRect();
+const btnRect = noBtn.getBoundingClientRect();
+
+const maxLeft = containerRect.width - btnRect.width;
+const maxTop = containerRect.height - btnRect.height;
+
+let randomLeft = Math.random() * maxLeft;
+let randomTop = Math.random() * maxTop;
+
+noBtn.style.position = 'relative';
+noBtn.style.left = randomLeft + 'px';
+noBtn.style.top = randomTop + 'px';
+}
+
+/* 👀 يهرب قبل ما السوريس تلمسو */
+document.addEventListener('mousemove', function(e){
+
+const btnRect = noBtn.getBoundingClientRect();
+const btnCenterX = btnRect.left + btnRect.width / 2;
+const btnCenterY = btnRect.top + btnRect.height / 2;
+
+const distanceX = e.clientX - btnCenterX;
+const distanceY = e.clientY - btnCenterY;
+
+const distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
+
+/* كان قربتلو أقل من 120px يهرب */
+if(distance < 120){
+moveButton();
+}
+});
+
+/* موبايل */
+noBtn.addEventListener('touchstart', function(e){
+e.preventDefault();
+moveButton();
+});
+
+/* OUI */
+yesBtn.addEventListener('click', function(){
+responseMessage.innerHTML='Sahit Sahit 🤪';
+responseMessage.classList.remove('attention');
+void responseMessage.offsetWidth;
+responseMessage.classList.add('attention');
+});
+</script>
+
+</body>
+</html>
