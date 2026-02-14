@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saint-Valentin - Bouton Fuyant ❤️</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(145deg, #ffb6c1 0%, #ff9eb5 40%, #ffc0cb 100%);
+            font-family: 'Arial', 'Helvetica', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow-x: hidden;
+            padding: 20px;
+            margin: 0;
+        }
+
+        /* Ballons flottants */
+        .balloon {
+            position: absolute;
+            bottom: -100px;
+            width: 60px;
+            height: 80px;
+            background-color: #ff6f91;
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            box-shadow: inset -10px -10px 10px rgba(0,0,0,0.1);
+            animation: floatUp 12s linear infinite;
+            z-index: 1;
+        }
+
+        .balloon::before {
+            content: '';
+            position: absolute;
+            width: 2px;
+            height: 50px;
+            background-color: #8b5a2b;
+            top: 78px;
+            left: 29px;
+            transform: rotate(5deg);
+        }
+
+        .balloon::after {
+            content: '';
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background-color: #8b5a2b;
+            border-radius: 50%;
+            top: 70px;
+            left: 24px;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0.9;
+            }
+            100% {
+                transform: translateY(-120vh) rotate(10deg);
+                opacity: 0.2;
+            }
+        }
+
+        /* Cœur principal décoratif */
+        .big-heart {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 5rem;
+            animation: pulse 1.5s infinite;
+            z-index: 5;
+            opacity: 0.5;
+            user-select: none;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        /* Petit cœur volant */
+        .floating-heart {
+            position: absolute;
+            color: #ff3366;
+            font-size: 2rem;
+            animation: heartFloat 5s ease-in-out infinite;
+            z-index: 4;
+            user-select: none;
+            text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.5);
+        }
+
+        @keyframes heartFloat {
+            0% { transform: translateY(0) rotate(0deg); opacity: 0.6; }
+            50% { transform: translateY(-30px) rotate(5deg); opacity: 1; }
+            100% { transform: translateY(0) rotate(0deg); opacity: 0.6; }
+        }
+
+        /* Carte principale */
+        .valentine-card {
+            background: rgba(255, 240, 245, 0.85);
+            backdrop-filter: blur(8px);
+            border-radius: 40px;
+            padding: 40px 30px;
+            box-shadow: 0 20px 40px rgba(255, 20, 80, 0.3), 0 0 0 4px #fff inset, 0 0 0 8px #ff99aa inset;
+            text-align: center;
+            max-width: 600px;
+            width: 100%;
+            position: relative;
+            z-index: 20;
+            border: 2px solid white;
+        }
+
+        h1 {
+            font-size: 3rem;
+            color: #d63c5e;
+            text-shadow: 3px 3px 0 #fff;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+        }
+
+        .subtitle {
+            font-size: 1.4rem;
+            color: #b34167;
+            margin-bottom: 40px;
+            font-style: italic;
+            font-weight: bold;
+        }
+
+        .button-container {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+            margin: 40px 0 20px;
+            min-height: 120px;
+            position: relative;
+        }
+
+        .btn {
+            padding: 16px 42px;
+            font-size: 1.8rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 60px;
+            cursor: pointer;
+            box-shadow: 0 8px 0 #a13a4b, 0 12px 20px rgba(0,0,0,0.2);
+            transition: all 0.1s ease;
+            letter-spacing: 2px;
+            border: 2px solid white;
+            position: relative;
+            z-index: 30;
+            min-width: 180px;
+        }
+
+        .btn-yes {
+            background: #ff4d6d;
+            color: white;
+        }
+
+        .btn-yes:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 0 #a13a4b, 0 16px 24px rgba(0,0,0,0.25);
+            background: #ff3355;
+        }
+
+        .btn-no {
+            background: #b3b3b3;
+            color: #4a4a4a;
+            cursor: default;  /* On enlève le curseur pointer visuellement */
+            box-shadow: 0 8px 0 #6b6b6b, 0 12px 20px rgba(0,0,0,0.2);
+            transition: transform 0.2s, left 0.1s, top 0.1s; /* Déplacements fluides */
+        }
+
+        /* Message de réponse */
+        .response-message {
+            margin-top: 30px;
+            font-size: 2rem;
+            font-weight: bold;
+            color: #c72e5c;
+            min-height: 80px;
+            text-shadow: 2px 2px 0 #fff;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 50px;
+            padding: 15px;
+            border: 3px dashed white;
+        }
+
+        footer {
+            margin-top: 20px;
+            font-size: 1rem;
+            color: #a1355a;
+            font-weight: bold;
+        }
+
+        /* Responsive */
+        @media (max-width: 500px) {
+            h1 { font-size: 2.2rem; }
+            .btn { font-size: 1.5rem; padding: 14px 25px; min-width: 140px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Ballons multiples avec différentes couleurs, tailles, délais -->
+    <div class="balloon" style="left: 5%; background-color: #ff9fbb; width: 70px; height: 90px; animation-delay: 0s;"></div>
+    <div class="balloon" style="left: 15%; background-color: #ffb3c6; width: 50px; height: 70px; animation-delay: 2s;"></div>
+    <div class="balloon" style="left: 25%; background-color: #ff7b9c; width: 65px; height: 85px; animation-delay: 1s;"></div>
+    <div class="balloon" style="left: 40%; background-color: #ff99aa; width: 55px; height: 75px; animation-delay: 4s;"></div>
+    <div class="balloon" style="left: 55%; background-color: #ff809d; width: 80px; height: 100px; animation-delay: 0.5s;"></div>
+    <div class="balloon" style="left: 70%; background-color: #ffa5b9; width: 45px; height: 65px; animation-delay: 3s;"></div>
+    <div class="balloon" style="left: 85%; background-color: #ff6f8f; width: 75px; height: 95px; animation-delay: 1.5s;"></div>
+    <div class="balloon" style="left: 95%; background-color: #ff8da1; width: 60px; height: 80px; animation-delay: 2.5s;"></div>
+
+    <!-- Cœurs flottants décoratifs -->
+    <div class="floating-heart" style="top: 10%; left: 3%;">❤️</div>
+    <div class="floating-heart" style="top: 70%; left: 90%; animation-delay: 0.3s; font-size: 2.5rem;">❤️</div>
+    <div class="floating-heart" style="top: 40%; left: 85%; animation-delay: 1.2s;">❤️</div>
+    <div class="floating-heart" style="top: 80%; left: 15%; animation-delay: 0.7s; font-size: 1.8rem;">❤️</div>
+    <div class="floating-heart" style="top: 20%; left: 88%; animation-delay: 2s;">❤️</div>
+
+    <!-- Grand cœur décoratif -->
+    <div class="big-heart">❤️</div>
+
+    <!-- Carte principale -->
+    <div class="valentine-card">
+        <h1>💖 Saint-Valentin 💖</h1>
+        <div class="subtitle">  هل تؤمن بالحب يا حَبيبُ</div>
+
+        <div class="button-container" id="buttonContainer">
+            <!-- Bouton OUI fixe -->
+            <button class="btn btn-yes" id="yesBtn">OUI ❤️</button>
+            
+            <!-- Bouton NON qui se déplace (insaisissable) -->
+            <button class="btn btn-no" id="noBtn" onmouseenter="moveButton()" onclick="return false;">NON</button>
+        </div>
+
+        <!-- Message qui change quand on clique sur OUI -->
+        <div class="response-message" id="responseMessage">😊 جرب قول لا</div>
+    </div>
+
+    <script>
+        // Récupération des éléments
+        const noBtn = document.getElementById('noBtn');
+        const yesBtn = document.getElementById('yesBtn');
+        const responseMessage = document.getElementById('responseMessage');
+        const container = document.getElementById('buttonContainer');
+
+        // Variable pour éviter les mouvements trop fréquents
+        let moveTimeout;
+
+        // Fonction pour déplacer le bouton NON de façon aléatoire
+        function moveButton() {
+            // Annuler le timeout précédent pour éviter les appels en rafale
+            if (moveTimeout) {
+                clearTimeout(moveTimeout);
+            }
+
+            // On utilise un petit délai pour que le mouvement soit plus naturel (et éviter les soubresauts)
+            moveTimeout = setTimeout(() => {
+                // Récupérer les dimensions du conteneur et du bouton
+                const containerRect = container.getBoundingClientRect();
+                const btnRect = noBtn.getBoundingClientRect();
+
+                // Calculer les limites de déplacement (en restant dans le conteneur)
+                const maxLeft = containerRect.width - btnRect.width;
+                const maxTop = containerRect.height - btnRect.height;
+
+                // Générer des positions aléatoires
+                let randomLeft = Math.random() * maxLeft;
+                let randomTop = Math.random() * maxTop;
+
+                // Appliquer les positions (le bouton est en position relative par défaut, on utilise left/top)
+                noBtn.style.position = 'relative';
+                noBtn.style.left = randomLeft + 'px';
+                noBtn.style.top = randomTop + 'px';
+
+                // Bonus : changer un peu la couleur pour s'amuser
+                const colors = ['#ffaaaa', '#ffbbbb', '#ff9999', '#ff8080', '#ff6666'];
+                noBtn.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+            }, 30); // petit délai pour fluidité
+        }
+
+        // Au cas où on touche le bouton avec le doigt (mobile) on le déplace aussi
+        noBtn.addEventListener('touchstart', function(e) {
+            e.preventDefault(); // Empêche le clic
+            moveButton();
+        });
+
+        // Empêcher tout clic sur le bouton NON
+        noBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            // On le déplace aussi au clic (pour les environnements sans hover)
+            moveButton();
+            return false;
+        });
+
+        // Action pour le bouton OUI
+        yesBtn.addEventListener('click', function() {
+            responseMessage.innerHTML = '💞 Sahit Sahit  💞';
+            responseMessage.style.color = '#b34167';
+            // Petite animation supplémentaire
+            yesBtn.style.transform = 'scale(1.1)';
+            setTimeout(() => { yesBtn.style.transform = 'scale(1)'; }, 200);
+
+            // On fait aussi bouger le NON par malice
+            moveButton();
+        });
+
+        // Initialisation discrète : on s'assure que le bouton NON est bien positionné relative
+        window.addEventListener('load', function() {
+            noBtn.style.position = 'relative';
+            noBtn.style.left = '0px';
+            noBtn.style.top = '0px';
+        });
+
+        // Le bouton NON bouge aussi quand on approche la souris de n'importe où sur la page
+        // pour le rendre vraiment insaisissable (optionnel)
+        document.addEventListener('mousemove', function(e) {
+            // Optionnel: Ne pas inonder d'événements, on pourrait limiter
+            // mais pour l'instant on ne fait rien ici car le onmouseenter gère.
+            // On pourrait ajouter une logique si la souris est proche du bouton
+            // Mais le onmouseenter suffit.
+        });
+
+        // Pour le fun: si on essaie de cliquer sur NON, message taquin
+        noBtn.addEventListener('mouseup', function() {
+            // On ne fait rien, mais on peut afficher un message si on veut
+        });
+
+        // Petite touche: si on passe beaucoup la souris, le bouton finit par sortir du conteneur? 
+        // On le garde dans le conteneur grâce aux calculs.
+        // On peut aussi rafraîchir les limites si la fenêtre change
+        window.addEventListener('resize', function() {
+            // Remettre le bouton à une position visible
+            noBtn.style.left = '0px';
+            noBtn.style.top = '0px';
+        });
+
+        // Bonus: essayer de capturer le bouton NON avec la souris est presque impossible 
+        // car onMouseEnter le déplace. On peut aussi le déplacer toutes les 500ms pour rire
+        setInterval(function() {
+            // Déplace doucement le NON toutes les 1.5 secondes, même si on ne le touche pas
+            // pour le rendre encore plus fuyant
+            const containerRect = container.getBoundingClientRect();
+            const btnRect = noBtn.getBoundingClientRect();
+            const maxLeft = containerRect.width - btnRect.width;
+            const maxTop = containerRect.height - btnRect.height;
+            if (maxLeft > 0 && maxTop > 0) {
+                let randomLeft = Math.random() * maxLeft;
+                let randomTop = Math.random() * maxTop;
+                noBtn.style.left = randomLeft + 'px';
+                noBtn.style.top = randomTop + 'px';
+            }
+        }, 1500); // toutes les 1.5 secondes
+    </script>
+</body>
+</html>
